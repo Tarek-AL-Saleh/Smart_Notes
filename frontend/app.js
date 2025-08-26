@@ -1,7 +1,7 @@
 const API_URL = "https://smart-notes-avdl.onrender.com";
 
 let notes = [];
-let container = null;
+let container = document.getElementById("notesContainer");
 
 const createNoteModal = document.getElementById("CreateNoteModal");
 const closeCreateModal = document.getElementById("closeCreateNote");
@@ -19,21 +19,19 @@ const editTags = document.getElementById("editTags");
 const closeModal = document.getElementById("closeNoteEdit");
 const saveEdit = document.getElementById("saveEdit");
 
+const emptyMessage = document.getElementById("emptyMessage");
 // Fetch and display notes
 async function fetchNotes() {
   const res = await fetch(`${API_URL}/notes`);
   notes = await res.json();
   if (!notes.length) {
-    container = document.getElementById("notesContainer");
-    container.innerHTML = `<div></div>
-    <div>
-    <p class="text-gray-600 text-xl text-center mt-10">No notes found :(</p>
-  </div>`;
-    return;
+    emptyMessage.classList.remove("hidden"); // show message
+    container.innerHTML = ""; // clear grid
   }
-
-  container = document.getElementById("notesContainer");
-  container.innerHTML = notes.map(renderNote).join("");
+  else{
+    emptyMessage.classList.add("hidden"); // hide message
+    container.innerHTML = notes.map(note => `<div>${note.text}</div>`).join("");
+  }
 }
 
 // Create Notes from DB
