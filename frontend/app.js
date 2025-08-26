@@ -32,7 +32,7 @@ async function fetchNotes() {
   }
   else{
     emptyMessage.classList.add("hidden"); // hide message
-    container.innerHTML = notes.map(note => `<div>${note.text}</div>`).join("");
+    container.innerHTML = notes.map(renderNote).join("");
   }
 }
 
