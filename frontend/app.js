@@ -1,7 +1,7 @@
 const API_URL = "https://smart-notes-avdl.onrender.com";
 
 let notes = [];
-let container = document.getElementById("notesContainer");
+let container = null
 
 const createNoteModal = document.getElementById("CreateNoteModal");
 const closeCreateModal = document.getElementById("closeCreateNote");
@@ -23,10 +23,12 @@ const emptyMessage = document.getElementById("emptyMessage");
 // Fetch and display notes
 async function fetchNotes() {
   const res = await fetch(`${API_URL}/notes`);
+  container = document.getElementById("notesContainer");
   notes = await res.json();
   if (!notes.length) {
     emptyMessage.classList.remove("hidden"); // show message
     container.innerHTML = ""; // clear grid
+    return;
   }
   else{
     emptyMessage.classList.add("hidden"); // hide message
