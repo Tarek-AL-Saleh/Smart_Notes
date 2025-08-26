@@ -2,6 +2,7 @@ const API_URL = "https://smart-notes-avdl.onrender.com";
 
 let notes = [];
 let container = null
+const emptyMessage = document.getElementById("emptyMessage");
 
 const createNoteModal = document.getElementById("CreateNoteModal");
 const closeCreateModal = document.getElementById("closeCreateNote");
@@ -19,7 +20,8 @@ const editTags = document.getElementById("editTags");
 const closeModal = document.getElementById("closeNoteEdit");
 const saveEdit = document.getElementById("saveEdit");
 
-const emptyMessage = document.getElementById("emptyMessage");
+
+
 // Fetch and display notes
 async function fetchNotes() {
   const res = await fetch(`${API_URL}/notes`);
